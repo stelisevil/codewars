@@ -107,7 +107,7 @@ function GetSum(a,b) {
   return (a+b)*(Math.abs(a-b)+1)*0.5;
 }
 
-/*
+/* 6kyu
   Write a function that takes in a string of one or more words,
   and returns the same string, but with all five or more letter
   words reversed (Just like the name of this Kata). Strings passed
@@ -131,4 +131,73 @@ function spinWords(str) {
     }
   })
   return newStr.join(' ');
+}
+
+/*
+  Create a function taking a positive integer as its parameter and returning a
+  string containing the Roman Numeral representation of that integer.
+
+  Modern Roman numerals are written by expressing each digit separately
+  starting with the left most digit and skipping any digit with a value of zero.
+  In Roman numerals 1990 is rendered: 1000=M, 900=CM, 90=XC; resulting in MCMXC.
+  2008 is written as 2000=MM, 8=VIII; or MMVIII.
+  1666 uses each Roman symbol in descending order: MDCLXVI.
+
+  Example:
+  solution(1000); // should return 'M'
+
+  Help:
+  Symbol    Value
+  I          1
+  V          5
+  X          10
+  L          50
+  C          100
+  D          500
+  M          1,000
+  Remember that there can't be more than 3 identical symbols in a row.
+*/
+
+function solution(number){
+  roman = [];
+  for (number; number >= 1000; number = number - 1000) {
+    roman.push('M');
+  }
+  for (number; number >= 900; number = number - 900) {
+    roman.push('CM');
+  }
+  for (number; number >= 500; number = number - 500) {
+    roman.push('D');
+  }
+  for (number; number >= 400; number = number - 400) {
+    roman.push('CD');
+  }
+  for (number; number >= 100; number = number - 100) {
+    roman.push('C');
+  }
+  for (number; number >= 90; number = number - 90) {
+    roman.push('XC');
+  }
+  for (number; number >= 50; number = number - 50) {
+    roman.push('L');
+  }
+  for (number; number >= 40; number = number - 40) {
+    roman.push('XL');
+  }
+  for (number; number >= 10; number = number - 10) {
+    roman.push('X');
+  }
+  for (number; number >= 9; number = number - 9) {
+    roman.push('IX');
+  }
+  for (number; number >= 5; number = number - 5) {
+    roman.push('V');
+  }
+  for (number; number >= 4; number = number - 4) {
+    roman.push('IV');
+  }
+  for (number; number >= 1; number = number - 1) {
+    roman.push('I');
+  }
+  return roman.join('');
 }
