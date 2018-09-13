@@ -201,3 +201,104 @@ function solution(number){
   }
   return roman.join('');
 }
+
+/* 6kyu
+  Given a string of words, you need to find the highest scoring word.
+  Each letter of a word scores points according to it's
+  position in the alphabet: a = 1, b = 2, c = 3 etc.
+  You need to return the highest scoring word as a string.
+  If two words score the same, return the word that appears
+  earliest in the original string.
+  All letters will be lowercase and all inputs will be valid.
+*/
+
+function high(str) {
+  if (str === '') {
+    return '';
+  } else {
+    let words = str.split(' ');
+    let points = words.map((word, i) => {
+      let lettersValueArray = word.split('').map((letter, j) => {
+        return score(letter);
+      })
+      let wordScore = lettersValueArray.reduce((acc, current) => {
+        return acc + current;
+      })
+      return wordScore
+    })
+    console.log(points)
+    let maxPoints = points.reduce((a,b) => {
+      return Math.max(a, b);
+    });
+    console.log(maxPoints)
+    let maxPointsIndex = points.findIndex(lettersValue => maxPoints === lettersValue)
+    return words[maxPointsIndex];
+  }
+}
+
+function score(letter) {
+  switch(letter) {
+    case 'a':
+      return 1;
+    case 'b':
+      return 2;
+    case 'c':
+      return 3;
+    case 'd':
+      return 4;
+    case 'e':
+      return 5;
+    case 'f':
+      return 6;
+    case 'g':
+      return 7;
+    case 'h':
+      return 8;
+    case 'i':
+      return 9;
+    case 'j':
+      return 10;
+    case 'k':
+      return 11;
+    case 'l':
+      return 12;
+    case 'm':
+      return 13;
+    case 'n':
+      return 14;
+    case 'o':
+      return 15;
+    case 'p':
+      return 16;
+    case 'q':
+      return 17;
+    case 'r':
+      return 18;
+    case 's':
+      return 19;
+    case 't':
+      return 20;
+    case 'u':
+      return 21;
+    case 'v':
+      return 22;
+    case 'w':
+      return 23;
+    case 'x':
+      return 24;
+    case 'y':
+      return 25;
+    case 'z':
+      return 26;
+  }
+}
+
+/* 5kyu
+  Given a positive number n > 1 find the prime factor decomposition of n.
+  The result will be a string with the following form :
+
+   "(p1**n1)(p2**n2)...(pk**nk)"
+  with the p(i) in increasing order and n(i) empty if n(i) is 1.
+
+  Example: n = 86240 should return "(2**5)(5)(7**2)(11)"
+*/
