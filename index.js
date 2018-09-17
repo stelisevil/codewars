@@ -302,3 +302,43 @@ function score(letter) {
 
   Example: n = 86240 should return "(2**5)(5)(7**2)(11)"
 */
+
+function primeFactors(number){
+  let primeArray = [];
+  let singleValueArray = [];
+  let allPrimes = findLowestPrimeFactor(number, primeArray)
+  allPrimes.forEach(prime => {
+    if (!singleValueArray.includes(prime)) {
+      singleValueArray.push(prime)
+    }
+  })
+  let primeString = [];
+  singleValueArray.forEach(prime => {
+    primeString.push(`(${prime}`)
+    let primeCount = 0
+    primeArray.forEach(factor => {
+      if (factor === prime) {
+        primeCount++
+      }
+    })
+    if (primeCount === 1) {
+      primeString.push(`)`);
+    } else {
+      primeString.push(`**${primeCount})`)
+    }
+  })
+  return primeString.join('');
+}
+
+function findLowestPrimeFactor(n, primeArray) {
+  if (n === 1) {
+    return primeArray;
+  }
+  for (let i = 2; i <= n; i++) {
+    if (n % i === 0) {
+      primeArray.push(i);
+      n = n / i;
+      return findLowestPrimeFactor(n, primeArray);
+    }
+  }
+}
