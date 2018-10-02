@@ -342,3 +342,71 @@ function findLowestPrimeFactor(n, primeArray) {
     }
   }
 }
+
+/* 5kyu
+  The marketing team is spending way too much time typing in hashtags.
+  Let's help them with out own Hashtag Generator!
+
+  Here's the deal:
+
+  It must start with a hashtag (#).
+  All words must have their first letter capitalized.
+  If the final result is longer than 140 chars it must return false.
+  If the input or the result is an empty string it must return false.
+  Examples
+  " Hello there thanks for trying my Kata"  =>  "#HelloThereThanksForTryingMyKata"
+  "    Hello     World   "                  =>  "#HelloWorld"
+  ""                                        =>  false
+*/
+
+function generateHashtag(str) {
+  if (str.trim() === '') {
+    return false
+  }
+  let wordsArray = str.split(' ');
+  let capitalisedWords = wordsArray.map((word, i) => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  });
+  let joinedWords = capitalisedWords.join('');
+  if (joinedWords.length > 139) {
+    return false
+  }
+  return `#${joinedWords}`;
+}
+
+/* 5kyu ## STILL WORKING ON THIS!!! ##
+  Write a function named firstNonRepeatingLetter† that takes a string input,
+  and returns the first character that is not repeated anywhere in the string.
+
+  For example, if given the input 'stress', the function should return 't',
+  since the letter t only occurs once in the string, and occurs first in the
+  string.
+
+  As an added challenge, upper- and lowercase letters are considered the same
+  character, but the function should return the correct case for the initial
+  letter. For example, the input 'sTreSS' should return 'T'.
+
+  If a string contains all repeating characters, it should return the empty
+  string ("").
+
+  † Note: the function is called firstNonRepeatingLetter for historical reasons,
+   but your function should handle any Unicode character.
+*/
+
+function firstNonRepeatingLetter(str) {
+  let lettersArray = str.split('');
+  let nonRepeats = [];
+  lettersArray.forEach((letter, i) => {
+    let letterCount = 0
+    lettersArray.forEach(lett => {
+      if (lett === letter) {
+        letterCount++
+      };
+      if (letterCount === 1) {
+        nonRepeats.push(lett)
+      }
+    })
+  });
+  console.log(nonRepeats)
+  return nonRepeats.length > 0 ? nonRepeats[0] : "";
+}
