@@ -374,7 +374,7 @@ function generateHashtag(str) {
   return `#${joinedWords}`;
 }
 
-/* 5kyu ## STILL WORKING ON THIS!!! ##
+/* 5kyu
   Write a function named firstNonRepeatingLetter† that takes a string input,
   and returns the first character that is not repeated anywhere in the string.
 
@@ -394,7 +394,7 @@ function generateHashtag(str) {
 */
 
 function firstNonRepeatingLetter(str) {
-  let lettersArray = str.split('');
+  let lettersArray = str.toLowerCase().split('');
   let nonRepeats = [];
   lettersArray.forEach((letter, i) => {
     let letterCount = 0
@@ -402,11 +402,36 @@ function firstNonRepeatingLetter(str) {
       if (lett === letter) {
         letterCount++
       };
-      if (letterCount === 1) {
-        nonRepeats.push(lett)
-      }
     })
+    if (letterCount === 1) {
+      nonRepeats.push(i)
+    }
   });
   console.log(nonRepeats)
-  return nonRepeats.length > 0 ? nonRepeats[0] : "";
+  let char = nonRepeats[0]
+  return nonRepeats.length > 0 ? str[char] : "";
+}
+
+/* 5kyu ## STILL WORKING ON THIS!! ##
+  Write a program that will calculate the number of trailing zeros in a factorial
+  of a given number.
+
+  N! = 1 * 2 * 3 * ... * N
+
+  Be careful 1000! has 2568 digits...
+
+  For more info, see: http://mathworld.wolfram.com/Factorial.html
+
+  Examples
+  zeros(6) = 1
+  # 6! = 1 * 2 * 3 * 4 * 5 * 6 = 720 --> 1 trailing zero
+
+  zeros(12) = 2
+  # 12! = 479001600 --> 2 trailing zeros
+  Hint: You're not meant to calculate the factorial. Find another way to
+  find the number of zeros.
+*/
+
+function zeros (n) {
+  return Math.floor(n/5);
 }
