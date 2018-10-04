@@ -412,7 +412,7 @@ function firstNonRepeatingLetter(str) {
   return nonRepeats.length > 0 ? str[char] : "";
 }
 
-/* 5kyu ## STILL WORKING ON THIS!! ##
+/* 5kyu
   Write a program that will calculate the number of trailing zeros in a factorial
   of a given number.
 
@@ -433,5 +433,78 @@ function firstNonRepeatingLetter(str) {
 */
 
 function zeros (n) {
-  return Math.floor(n/5);
+  let trailingZeros = 0
+  for (let i = 1; (n * Math.pow(0.2, i)) > 1; i++) {
+    trailingZeros = trailingZeros + Math.floor((n * Math.pow(0.2, i)))
+  }
+  return trailingZeros
 }
+
+/* 6kyu
+  A grid of numbers with an equal height and width is given and your task
+  is to find the largest possible product between four adjacent numbers
+  in the same direction. The directions can be horizontal, vertical or diagonal.
+
+  Some example grids are shown below.
+
+  04 04 04 04 01 01  |  04*04*04*04 = 256
+  01 01 01 01 01 01  |
+  01 01 01 01 01 01  |
+  01 01 01 01 01 01  |
+  01 01 01 01 01 01  |
+  01 01 01 01 01 01  |
+
+  01 01 01 01 01 04  |  04*04*04*04 = 256
+  01 01 01 01 01 04  |
+  01 01 01 01 01 04  |
+  01 01 01 01 01 04  |
+  01 01 01 01 01 01  |
+  01 01 01 01 01 01  |
+
+  04 01 01 01 01 01  |  04*04*04*04 = 256
+  01 04 01 01 01 01  |
+  01 01 04 01 01 01  |
+  01 01 01 04 01 01  |
+  01 01 01 01 01 01  |
+  01 01 01 01 01 01  |
+
+  01 01 01 04 01 01  |  04*04*04*04 = 256
+  01 01 04 01 01 01  |
+  01 04 01 01 01 01  |
+  04 01 01 01 01 01  |
+  01 01 01 01 01 01  |
+  01 01 01 01 01 01  |
+
+  The smallest grid that can be given is 4x4 and the contained numbers will
+  have a minimum value of 1 and a maximum value of 99.
+
+  A solution should be created to test all combinations of vertical,
+  horizontal and diagonal lines.
+
+  Adapted from Project Euler.
+*/
+
+function getLargestProduct(grid) {
+  let gridSize = grid.length;
+  let largestProduct = 0
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize - 3; j++) {
+      let horizontal = grid[i][j] * grid[i][j+1] * grid[i][j+2] * grid[i][j+3];
+      largestProduct = Math.max(horizontal, largestProduct);
+    };
+  };
+  for (let i = 0; i < gridSize - 3; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      let vertical = grid[i][j] * grid[i+1][j] * grid[i+2][j] * grid[i+3][j];
+      largestProduct = Math.max(vertical, largestProduct);
+    };
+  };
+  for (let i = 0; i < gridSize - 3; i++) {
+    for (let j = 0; j < gridSize - 3; j++) {
+      let diagonal = grid[i][j] * grid[i+1][j+1] * grid[i+2][j+2] * grid[i+3][j+3];
+      let revDiagonal = grid[i][j+3] * grid[i+1][j+2] * grid[i+2][j+1] * grid[i+3][j];
+      largestProduct = Math.max(diagonal, revDiagonal, largestProduct);
+    };
+  };
+  return largestProduct;
+};
